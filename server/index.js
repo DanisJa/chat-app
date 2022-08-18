@@ -24,12 +24,13 @@ io.on('connection', (socket) => {
 
 	socket.on('send_message', (data) => {
 		socket.to(data.room).emit('recieve_message', data);
+		console.log(`User ${data.author} sent a message.`);
 	});
 	socket.on('disconnect', () => {
-		console.log('User disconnected', socket.id);
+		console.log(`User disconnected`);
 	});
 });
 
-server.listen(3001, () => {
+server.listen(3001 || process.env.PORT, () => {
 	console.log('Server started on port 3001');
 });
